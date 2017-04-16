@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">tarakan</string>
+    <string name="app_name">Tarakan</string>
+    <string name="description_name">Правила игры</string>
+    <string name="game_slogan">Поймай хитрого таракана</string>
+    <string name="game_description1">В вашей квартире поселился наглый и упрямый таракан.</string>
+    <string name="game_description2">Он бегает по комнатам и прячется по разным местам.</string>
+    <string name="game_description3">Ваша задача - найти его, нажимая на предметы, среди которых он может скрываться.</string>
+    <string name="game_description4">Таракан хитрый и проворный.</string>
+    <string name="game_description5">У вас только 10 попыток, чтобы его обнаружить.</string>
+    <string name="entry_button">Начать</string>
+    <string name="description_button">Вперёд!</string>
 </resources>

@@ -2,26 +2,26 @@ package com.goncharov.anton.tarakan;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class DescriptionActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_description);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //создаём кнопку и присваиваем ей слушатель
-        Button mainButton = (Button)findViewById(R.id.button_main);
-        mainButton.setOnClickListener(new View.OnClickListener(){
+        Button descriptionButton = (Button)findViewById(R.id.button_desc);
+        descriptionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 //создаём Intent для перехода на другую активность
-                Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
+                Intent intent = new Intent(DescriptionActivity.this, KitchenActivity.class);
                 startActivity(intent);
             }
         });
