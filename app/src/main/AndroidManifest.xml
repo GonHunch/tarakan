@@ -17,8 +17,11 @@
         </activity>
         <activity
             android:name=".DescriptionActivity"
-            android:label="@string/description_name" />
-        <activity android:name=".KitchenActivity"></activity>
+            android:label="@string/description_name"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".KitchenActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" />
     </application>
 
 </manifest>
