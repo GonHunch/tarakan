@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/tarakan_kitchen_9"
     android:columnCount="3"
-    android:elevation="1dp"
     android:rowCount="5"
     tools:context="com.goncharov.anton.tarakan.KitchenActivity">
 
@@ -19,7 +18,7 @@
         android:layout_rowWeight="1"
         android:background="@drawable/back"
         android:singleLine="false"
-        android:tag="21" />
+        android:tag="1" />
 
     <Button
         android:id="@+id/button2"
@@ -30,7 +29,7 @@
         android:layout_rowWeight="1"
         android:background="@drawable/back"
         android:singleLine="false"
-        android:tag="21" />
+        android:tag="2" />
 
     <Button
         android:id="@+id/button3"
@@ -41,7 +40,7 @@
         android:layout_rowWeight="1"
         android:background="@drawable/back"
         android:singleLine="false"
-        android:tag="21" />
+        android:tag="3" />
 
     <Button
         android:id="@+id/button4"
@@ -52,7 +51,7 @@
         android:layout_rowWeight="1"
         android:background="@drawable/back"
         android:singleLine="false"
-        android:tag="21" />
+        android:tag="4" />
 
     <Button
         android:id="@+id/button5"
@@ -62,7 +61,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="5" />
 
     <Button
         android:id="@+id/button6"
@@ -72,7 +71,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="6" />
 
     <Button
         android:id="@+id/button7"
@@ -82,7 +81,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="7" />
 
     <Button
         android:id="@+id/button8"
@@ -92,7 +91,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="8" />
 
     <Button
         android:id="@+id/button9"
@@ -102,7 +101,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="9" />
 
     <Button
         android:id="@+id/button10"
@@ -112,7 +111,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="10" />
 
     <Button
         android:id="@+id/button11"
@@ -122,7 +121,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="11" />
 
     <Button
         android:id="@+id/button12"
@@ -132,7 +131,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="12" />
 
     <Button
         android:id="@+id/button13"
@@ -142,7 +141,7 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="13" />
 
     <Button
         android:id="@+id/button14"
@@ -153,7 +152,7 @@
         android:layout_rowWeight="1"
         android:background="@drawable/back"
         android:singleLine="false"
-        android:tag="21" />
+        android:tag="14" />
 
     <Button
         android:id="@+id/button15"
@@ -163,6 +162,6 @@
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:background="@drawable/back"
-        android:tag="21" />
+        android:tag="15" />
 
 </GridLayout>

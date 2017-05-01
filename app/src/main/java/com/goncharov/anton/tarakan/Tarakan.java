@@ -5,7 +5,7 @@ class Tarakan {
 
     public void setPosition() {
         int a = 1;
-        int b = 24;
+        int b = 15;
         position = (int) (a + (Math.random() * b));
     }
 
