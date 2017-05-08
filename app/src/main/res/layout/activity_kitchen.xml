@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tarakan_kitchen_9"
+    android:columnCount="3"
+    android:rowCount="5"
     tools:context="com.goncharov.anton.tarakan.KitchenActivity">
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tarakan_kitchen_9"
-        android:columnCount="3"
-        android:rowCount="5">
 
     <Button
         android:id="@+id/button1"
@@ -168,8 +164,4 @@
         android:background="@drawable/back"
         android:tag="15" />
 
-    </GridLayout>
-
-
-</RelativeLayout>
-
+</GridLayout>
