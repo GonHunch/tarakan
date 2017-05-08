@@ -8,6 +8,7 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class KitchenActivity extends Activity {
@@ -42,8 +43,8 @@ public class KitchenActivity extends Activity {
 
         createMP();
 
-        Button button1 = (Button)findViewById(R.id.button1);
-        Button button2 = (Button)findViewById(R.id.button2);
+        final Button button1 = (Button)findViewById(R.id.button1);
+        final Button button2 = (Button)findViewById(R.id.button2);
 
         button1number = (String)button1.getTag();
         button2number = (String)button2.getTag();
@@ -65,7 +66,7 @@ public class KitchenActivity extends Activity {
                 }
                 if (tarakan.checkPosition(btn1number)) {
                     soundEngine.playTarakanSound(soundTarakanFound);
-
+                    button1.setBackgroundResource(R.mipmap.tarakan_icon);
                 } else {
                     soundEngine.playTarakanSound(soundTarakan);
                 }
@@ -86,6 +87,7 @@ public class KitchenActivity extends Activity {
                 }
                 if (tarakan.checkPosition(btn2number)) {
                     soundEngine.playTarakanSound(soundTarakanFound);
+                    button2.setBackgroundResource(R.mipmap.tarakan_icon);
                 } else {
                     soundEngine.playTarakanSound(soundTarakan);
                 }
