@@ -4,28 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.GridLayout;
 import android.widget.Toast;
+
 
 public class KitchenActivity extends Activity {
 
-   // private SoundPool mSoundPool;
-    private String button1number;
-    private String button2number;
-    private int btn1number;
-    private int btn2number;
-    private int soundButton1;
-    private int soundButton2;
     private int soundTarakan;
     private int soundTarakanFound;
     MediaPlayer mMediaPlayer;
     Tarakan tarakan = new Tarakan();
     SoundEngine soundEngine = new SoundEngine();
 
+    GridLayout gridLayout;
     private static Context mContext;
 
 
@@ -34,6 +28,7 @@ public class KitchenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen);
 
+        //Запрещаем переворачивание экрана
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mContext = this;
@@ -41,61 +36,46 @@ public class KitchenActivity extends Activity {
         tarakan.setPosition();
         Toast.makeText(this, tarakan.getPosition(), Toast.LENGTH_SHORT).show();
 
+        //Запускаем фоновую музыку
         createMP();
 
-        final Button button1 = (Button)findViewById(R.id.button1);
-        final Button button2 = (Button)findViewById(R.id.button2);
+        gridLayout = (GridLayout)findViewById(R.id.kitchen);
 
-        button1number = (String)button1.getTag();
-        button2number = (String)button2.getTag();
-        //Toast.makeText(this, button1number, Toast.LENGTH_SHORT).show();
-        btn1number = Integer.parseInt(button1number);
-        btn2number = Integer.parseInt(button2number);
+        String[] sounds = {"chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg", "cups_breaking.wav",
+                "chicken.ogg"};
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        //Обходим все кнопки и создаём для каждой свой обработчик
+        for (int i = 0; i < 15; i++) {
+            Button btn = (Button)gridLayout.getChildAt(i);
+            final int soundButton = soundEngine.loadSound(sounds[i]);
 
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, tarakan.getPosition(), Toast.LENGTH_SHORT).show();
-                soundEngine.playSound(soundButton1);
-                Thread tarakanThread = new Thread();
-                try {
-                    tarakanThread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    soundEngine.playSound(soundButton);
+                    Thread tarakanThread = new Thread();
+                    try {
+                        tarakanThread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
+                        soundEngine.playTarakanSound(soundTarakanFound);
+                        v.setBackgroundResource(R.mipmap.tarakan_icon);
+                    } else {
+                        soundEngine.playTarakanSound(soundTarakan);
+                    }
+                    tarakan.setPosition();
                 }
-                if (tarakan.checkPosition(btn1number)) {
-                    soundEngine.playTarakanSound(soundTarakanFound);
-                    button1.setBackgroundResource(R.mipmap.tarakan_icon);
-                } else {
-                    soundEngine.playTarakanSound(soundTarakan);
-                }
-                tarakan.setPosition();
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                soundEngine.playSound(soundButton2);
-                Thread tarakanThread = new Thread();
-                try {
-                    tarakanThread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (tarakan.checkPosition(btn2number)) {
-                    soundEngine.playTarakanSound(soundTarakanFound);
-                    button2.setBackgroundResource(R.mipmap.tarakan_icon);
-                } else {
-                    soundEngine.playTarakanSound(soundTarakan);
-                }
-                tarakan.setPosition();
-            }
-        });
+            });
+        }
     }
-
     public void createMP() {
         mMediaPlayer = MediaPlayer.create(this, R.raw.background_music);
         mMediaPlayer.setLooping(true);
@@ -112,9 +92,7 @@ public class KitchenActivity extends Activity {
         super.onResume();
         mMediaPlayer.start();
 
-        // получим идентификаторы
-        soundButton1 = soundEngine.loadSound("chicken.ogg");
-        soundButton2 = soundEngine.loadSound("cups_breaking.wav");
+        //Получим базовые звуки таракана
         soundTarakan = soundEngine.loadSoundTarakan("tarakan_laugh.mp3");
         soundTarakanFound = soundEngine.loadSoundTarakan("applause.mp3");
     }
