@@ -21,20 +21,23 @@ public class SoundEngine {
     private AssetManager mAssetManager;
     private AssetManager tarakanAssetManager;
 
+    //Конструктор (создаём SoundPool)
     public SoundEngine() {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            // Для устройств до Android 5
+            //Для устройств до Android 5
             createOldSoundPool();
         } else {
-            // Для новых устройств
+            //Для новых устройств
             createNewSoundPool();
         }
     }
 
+    //Получаем Stream для проигрывания
     public int getCurrentStreamID() {
         return mStreamID;
     }
 
+    //Проигрываем звук
     public int playSound(int sound) {
         if (sound > 0) {
             mStreamID = mSoundPool.play(sound, 1, 1, 1, 0, 1);
@@ -42,6 +45,7 @@ public class SoundEngine {
         return mStreamID;
     }
 
+    //Проигрываем звук таракана
     public int playTarakanSound(int sound) {
         if (sound > 0) {
             tarakanStreamID = mSoundPool.play(sound, 1, 1, 2, 0, 1);
@@ -49,12 +53,15 @@ public class SoundEngine {
         return tarakanStreamID;
     }
 
-    private Context getContextKitchenActivity(){
+    //Получаем Context от KitchenActivity
+    private Context getContextKitchenActivity() {
         return KitchenActivity.getContext();
     }
 
+    //Загружаем звуковой файл
     public int loadSound(String fileName) {
 
+        //Получаем Manager'а ресурсов
         mAssetManager = getContextKitchenActivity().getAssets();
         AssetFileDescriptor afd;
 
@@ -69,9 +76,11 @@ public class SoundEngine {
         return mSoundPool.load(afd, 1);
     }
 
+    //Загружаем звуковой файл таракана
     public int loadSoundTarakan(String fileName) {
         tarakanAssetManager = getContextKitchenActivity().getAssets();
         AssetFileDescriptor afd;
+
         try {
             afd = tarakanAssetManager.openFd(fileName);
         } catch (IOException e) {
@@ -83,6 +92,7 @@ public class SoundEngine {
         return mSoundPool.load(afd, 1);
     }
 
+    //Создание SoundPool для Android 5.0+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void createNewSoundPool() {
         AudioAttributes attributes = new AudioAttributes.Builder()
@@ -95,6 +105,7 @@ public class SoundEngine {
                 .build();
     }
 
+    //Создание SoundPool до Android 5.0
     @SuppressWarnings("deprecation")
     private void createOldSoundPool() {
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);

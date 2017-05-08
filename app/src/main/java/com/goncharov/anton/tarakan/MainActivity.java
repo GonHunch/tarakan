@@ -14,15 +14,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //код игры
-
+        //Запрещаем переворачивание экрана
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //создаём кнопку и присваиваем ей слушатель
+        //Создаём кнопку и присваиваем ей слушатель
         Button mainButton = (Button)findViewById(R.id.button_main);
         mainButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                //создаём Intent для перехода на другую активность
+                //Создаём Intent для перехода на другую активность
                 Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
                 startActivity(intent);
             }

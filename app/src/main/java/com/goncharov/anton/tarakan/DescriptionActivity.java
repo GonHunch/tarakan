@@ -14,13 +14,14 @@ public class DescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
+        //Запрещаем переворачивание экрана
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //создаём кнопку и присваиваем ей слушатель
+        //Создаём кнопку и присваиваем ей слушатель
         Button descriptionButton = (Button)findViewById(R.id.button_desc);
         descriptionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                //создаём Intent для перехода на другую активность
+                //Создаём Intent для перехода на другую активность
                 Intent intent = new Intent(DescriptionActivity.this, KitchenActivity.class);
                 startActivity(intent);
             }
