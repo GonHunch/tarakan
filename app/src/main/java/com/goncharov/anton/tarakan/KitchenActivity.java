@@ -2,6 +2,7 @@ package com.goncharov.anton.tarakan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 public class KitchenActivity extends Activity {
 
-    private SoundPool mSoundPool;
+   // private SoundPool mSoundPool;
     private String button1number;
     private String button2number;
     private int btn1number;
@@ -32,15 +33,14 @@ public class KitchenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         mContext = this;
 
         tarakan.setPosition();
         Toast.makeText(this, tarakan.getPosition(), Toast.LENGTH_SHORT).show();
 
-        mMediaPlayer = MediaPlayer.create(this, R.raw.background_music);
-        mMediaPlayer.setLooping(true);
-        mMediaPlayer.setVolume(0.3f, 0.3f);
-        mMediaPlayer.start();
+        createMP();
 
         Button button1 = (Button)findViewById(R.id.button1);
         Button button2 = (Button)findViewById(R.id.button2);
@@ -65,6 +65,7 @@ public class KitchenActivity extends Activity {
                 }
                 if (tarakan.checkPosition(btn1number)) {
                     soundEngine.playTarakanSound(soundTarakanFound);
+
                 } else {
                     soundEngine.playTarakanSound(soundTarakan);
                 }
@@ -93,6 +94,13 @@ public class KitchenActivity extends Activity {
         });
     }
 
+    public void createMP() {
+        mMediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.setVolume(0.3f, 0.3f);
+        mMediaPlayer.start();
+    }
+
     public static Context getContext(){
         return mContext;
     }
@@ -100,6 +108,7 @@ public class KitchenActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        mMediaPlayer.start();
 
         // получим идентификаторы
         soundButton1 = soundEngine.loadSound("chicken.ogg");
@@ -111,19 +120,30 @@ public class KitchenActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        mSoundPool.release();
-        mSoundPool = null;
+        soundEngine.mSoundPool.stop(soundEngine.getCurrentStreamID());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMediaPlayer.pause();
+        soundEngine.mSoundPool.stop(soundEngine.getCurrentStreamID());
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         releaseMP();
+        soundEngine.mSoundPool.release();
+        soundEngine.mSoundPool = null;
     }
 
     private void releaseMP() {
         if (mMediaPlayer != null) {
             try {
+                mMediaPlayer.reset();
+                mMediaPlayer.prepare();
                 mMediaPlayer.stop();
                 mMediaPlayer.release();
                 mMediaPlayer = null;

@@ -22,7 +22,17 @@ public class SoundEngine {
     private AssetManager tarakanAssetManager;
 
     public SoundEngine() {
-        createSoundPool();
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // Для устройств до Android 5
+            createOldSoundPool();
+        } else {
+            // Для новых устройств
+            createNewSoundPool();
+        }
+    }
+
+    public int getCurrentStreamID() {
+        return mStreamID;
     }
 
     public int playSound(int sound) {
@@ -72,17 +82,6 @@ public class SoundEngine {
         }
         return mSoundPool.load(afd, 1);
     }
-
-    public void createSoundPool() {
-        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            // Для устройств до Android 5
-            createOldSoundPool();
-        } else {
-            // Для новых устройств
-            createNewSoundPool();
-        }
-    }
-
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void createNewSoundPool() {
