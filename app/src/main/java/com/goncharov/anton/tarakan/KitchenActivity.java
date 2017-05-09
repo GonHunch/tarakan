@@ -42,8 +42,8 @@ public class KitchenActivity extends Activity {
         gridLayout = (GridLayout)findViewById(R.id.kitchen);
 
         String[] sounds = {"chicken.ogg", "cups_breaking.wav",
-                "chicken.ogg", "cups_breaking.wav",
-                "chicken.ogg", "cups_breaking.wav",
+                "door_screeching.wav", "plates_breaking.mp3",
+                "squeze.mp3", "cups_breaking.wav",
                 "chicken.ogg", "cups_breaking.wav",
                 "chicken.ogg", "cups_breaking.wav",
                 "chicken.ogg", "cups_breaking.wav",
@@ -129,6 +129,7 @@ public class KitchenActivity extends Activity {
         releaseMP();
         soundEngine.mSoundPool.release();
         soundEngine.mSoundPool = null;
+        clickCount = 0;
     }
 
     private void releaseMP() {
