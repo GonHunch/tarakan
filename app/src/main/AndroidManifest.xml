@@ -18,10 +18,18 @@
         <activity
             android:name=".DescriptionActivity"
             android:label="@string/description_name"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".KitchenActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" />
+        <activity
+            android:name=".GameOverActivity"
+            android:label="@string/game_over_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".WinActivity"
+            android:label="@string/win_name"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

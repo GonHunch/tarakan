@@ -2,6 +2,7 @@ package com.goncharov.anton.tarakan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class KitchenActivity extends Activity {
 
     GridLayout gridLayout;
     private static Context mContext;
-
+    private int clickCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,6 @@ public class KitchenActivity extends Activity {
         mContext = this;
 
         tarakan.setPosition();
-        Toast.makeText(this, tarakan.getPosition(), Toast.LENGTH_SHORT).show();
 
         //Запускаем фоновую музыку
         createMP();
@@ -50,6 +50,8 @@ public class KitchenActivity extends Activity {
                 "chicken.ogg", "cups_breaking.wav",
                 "chicken.ogg"};
 
+
+
         //Обходим все кнопки и создаём для каждой свой обработчик
         for (int i = 0; i < 15; i++) {
             Button btn = (Button)gridLayout.getChildAt(i);
@@ -58,6 +60,11 @@ public class KitchenActivity extends Activity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (clickCount == 9) {
+                        Intent intent = new Intent(KitchenActivity.this, GameOverActivity.class);
+                        startActivity(intent);
+                        return;
+                    }
                     soundEngine.playSound(soundButton);
                     Thread tarakanThread = new Thread();
                     try {
@@ -68,10 +75,15 @@ public class KitchenActivity extends Activity {
                     if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
                         soundEngine.playTarakanSound(soundTarakanFound);
                         v.setBackgroundResource(R.mipmap.tarakan_icon);
+                        clickCount = 0;
+                        Intent intent = new Intent(KitchenActivity.this, WinActivity.class);
+                        startActivity(intent);
+                        return;
                     } else {
                         soundEngine.playTarakanSound(soundTarakan);
                     }
                     tarakan.setPosition();
+                    clickCount++;
                 }
             });
         }

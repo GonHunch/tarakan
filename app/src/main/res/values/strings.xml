@@ -2,11 +2,23 @@
     <string name="app_name">Tarakan</string>
     <string name="description_name">Правила игры</string>
     <string name="game_slogan">Поймай хитрого таракана</string>
-    <string name="game_description1">В вашей квартире поселился наглый и упрямый таракан.</string>
-    <string name="game_description2">Он бегает по комнатам и прячется по разным местам.</string>
-    <string name="game_description3">Ваша задача - найти его, нажимая на предметы, среди которых он может скрываться.</string>
-    <string name="game_description4">Таракан хитрый и проворный.</string>
+    <string name="game_description1">В вашей квартире поселился хитрый и наглый таракан.</string>
+    <string name="game_description2">Он бегает по комнатам и прячется по разным углам.</string>
+    <string name="game_description3">Ваша задача - найти его, кликая по клеткам, на которых он может скрываться.</string>
+    <string name="game_description4">Таракан проворный и коварный…</string>
     <string name="game_description5">У вас только 10 попыток, чтобы его обнаружить.</string>
     <string name="entry_button">Начать</string>
     <string name="description_button">Вперёд!</string>
+    <string name="game_over_name">Вы проиграли!</string>
+    <string name="game_over_description1">Не удалось</string>
+    <string name="game_over_description2">На этот раз, таракан оказался хитрее и ускользнул от вас.</string>
+    <string name="game_over_description3">Но не расстраивайтесь. В следующий раз, у вас всё получится!</string>
+    <string name="game_over_button_1">Ещё разок!</string>
+    <string name="game_over_button_2">Сдаюсь</string>
+    <string name="win_name">Победа!</string>
+    <string name="win_description1">Поздравляем!</string>
+    <string name="win_description2">Вы поймали хитрого таракана!</string>
+    <string name="win_description3">Но не расслабляйтесь, ведь таракан может ещё вернуться и припомнить вам все обиды.</string>
+    <string name="win_button_1">Ещё разок!</string>
+    <string name="win_button_2">Выйти</string>
 </resources>
