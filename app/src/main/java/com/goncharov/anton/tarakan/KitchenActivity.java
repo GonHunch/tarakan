@@ -16,6 +16,7 @@ public class KitchenActivity extends Activity {
 
     private int soundTarakan;
     private int soundTarakanFound;
+    private int soundTarakanMissed;
     MediaPlayer mMediaPlayer;
     Tarakan tarakan = new Tarakan();
     SoundEngine soundEngine = new SoundEngine();
@@ -60,11 +61,15 @@ public class KitchenActivity extends Activity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent;
                     if (clickCount == 9) {
-                        Intent intent = new Intent(KitchenActivity.this, GameOverActivity.class);
+                        soundEngine.playTarakanSound(soundTarakanMissed);
+                        clickCount = 0;
+                        intent = new Intent(KitchenActivity.this, GameOverActivity.class);
                         startActivity(intent);
                         return;
                     }
+                    //Проигрываем разные звуки клеток с помощью массива sounds[i]
                     soundEngine.playSound(soundButton);
                     Thread tarakanThread = new Thread();
                     try {
@@ -76,7 +81,7 @@ public class KitchenActivity extends Activity {
                         soundEngine.playTarakanSound(soundTarakanFound);
                         v.setBackgroundResource(R.mipmap.tarakan_icon);
                         clickCount = 0;
-                        Intent intent = new Intent(KitchenActivity.this, WinActivity.class);
+                        intent = new Intent(KitchenActivity.this, WinActivity.class);
                         startActivity(intent);
                         return;
                     } else {
@@ -107,6 +112,7 @@ public class KitchenActivity extends Activity {
         //Получим базовые звуки таракана
         soundTarakan = soundEngine.loadSoundTarakan("tarakan_laugh.mp3");
         soundTarakanFound = soundEngine.loadSoundTarakan("applause.mp3");
+        soundTarakanMissed = soundEngine.loadSoundTarakan("game_over.mp3");
     }
 
     @Override
