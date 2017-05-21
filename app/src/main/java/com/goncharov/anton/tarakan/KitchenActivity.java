@@ -44,11 +44,11 @@ public class KitchenActivity extends Activity {
 
         tableLayout = (TableLayout) findViewById(R.id.kitchenAct);
 
-        String[][] sounds = {{"chicken.ogg", "cups_breaking.wav", "door_screeching.wav"},
-                {"plates_breaking.mp3", "squeze.mp3", "cups_breaking.wav"},
-                {"chicken.ogg", "cups_breaking.wav", "chicken.ogg"},
-                {"cups_breaking.wav","chicken.ogg", "cups_breaking.wav"},
-                {"chicken.ogg", "cups_breaking.wav", "chicken.ogg"}};
+        String[][] sounds = {{"air_slash.mp3", "bottles_kicking.mp3", "stone_throwing.mp3"},
+                {"glass_crashing.mp3", "squeze.mp3", "cups_breaking.mp3"},
+                {"door_screeching.mp3", "water_boiling.mp3", "opening_bottle.mp3"},
+                {"toy_screeching.mp3","plates_breaking.mp3", "hammer_hits.mp3"},
+                {"man_sneezing.mp3", "cat_screaming.mp3", "woman_screaming.mp3"}};
 
 
         TableRow[] tableRows = new TableRow[5];
@@ -75,7 +75,7 @@ public class KitchenActivity extends Activity {
                         soundEngine.playSound(soundButton);
                         Thread tarakanThread = new Thread();
                         try {
-                            tarakanThread.sleep(300);
+                            tarakanThread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView8"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:paddingTop="30dp"
         android:text="@string/win_description2"
         android:textAlignment="center"
@@ -39,7 +39,6 @@
         android:id="@+id/buttonAgainWin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="114dp"
         android:background="@color/main_color_tarakan"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -48,38 +47,39 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="61dp"
         tools:layout_editor_absoluteY="324dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="64dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/buttonExitWin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonAgainWin"
-        android:layout_alignBottom="@+id/buttonAgainWin"
-        android:layout_marginLeft="37dp"
-        android:layout_marginStart="37dp"
-        android:layout_toEndOf="@+id/buttonAgainWin"
-        android:layout_toRightOf="@+id/buttonAgainWin"
         android:background="@color/main_color_tarakan"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="@string/win_button_2"
         android:textColor="@android:color/background_light"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginRight="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_alignBaseline="@+id/buttonAgainWin"
+        android:layout_alignBottom="@+id/buttonAgainWin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_marginTop="29dp"
         android:text="@string/win_description3"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/textView9"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
