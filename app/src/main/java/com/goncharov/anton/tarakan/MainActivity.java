@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    static MediaPlayer mMediaPlayer;
+    MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static MediaPlayer getMediaPlayer() {
-        return mMediaPlayer;
-    }
-
     public void createMP() {
         mMediaPlayer = MediaPlayer.create(this, R.raw.start_theme);
         mMediaPlayer.setLooping(true);
@@ -55,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mMediaPlayer.pause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        mMediaPlayer.pause();
     }
 
     @Override

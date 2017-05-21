@@ -19,13 +19,13 @@ public class KitchenActivity extends Activity {
     private int soundTarakan;
     private int soundTarakanFound;
     private int soundTarakanMissed;
-    MediaPlayer mMediaPlayer;
     Tarakan tarakan = new Tarakan();
     SoundEngine soundEngine = new SoundEngine();
 
     TableLayout tableLayout;
     private static Context mContext;
     private int clickCount = 0;
+    static MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +64,14 @@ public class KitchenActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         Intent intent;
+                        v.setEnabled(true);
+
                         if (clickCount == 9) {
+                            v.setEnabled(false);
                             soundEngine.playTarakanSound(soundTarakanMissed);
-                            clickCount = 0;
                             intent = new Intent(KitchenActivity.this, GameOverActivity.class);
                             startActivity(intent);
+                            clickCount = 0;
                             return;
                         }
                         //Проигрываем разные звуки клеток с помощью массива sounds[i]
@@ -80,11 +83,12 @@ public class KitchenActivity extends Activity {
                             e.printStackTrace();
                         }
                         if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
+                            v.setEnabled(false);
                             soundEngine.playTarakanSound(soundTarakanFound);
                             v.setBackgroundResource(R.mipmap.tarakan_icon);
-                            clickCount = 0;
                             intent = new Intent(KitchenActivity.this, WinActivity.class);
                             startActivity(intent);
+                            clickCount = 0;
                             return;
                         } else {
                             soundEngine.playTarakanSound(soundTarakan);
@@ -96,6 +100,13 @@ public class KitchenActivity extends Activity {
             }
         }
     }
+
+
+    public static MediaPlayer getMediaPlayer() {
+        return mMediaPlayer;
+    }
+
+
     public void createMP() {
         mMediaPlayer = MediaPlayer.create(this, R.raw.background_music);
         mMediaPlayer.setLooping(true);

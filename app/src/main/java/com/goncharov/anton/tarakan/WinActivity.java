@@ -29,10 +29,19 @@ public class WinActivity extends AppCompatActivity {
         Button exitButton = (Button)findViewById(R.id.buttonExitWin);
         exitButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                //Создаём Intent для перехода на другую активность
+                //Убиваем активность
                 Intent intent = new Intent(WinActivity.this, MainActivity.class);
-                startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        moveTaskToBack(true);
+        //System.runFinalization();
+        System.exit(0);
     }
 }
