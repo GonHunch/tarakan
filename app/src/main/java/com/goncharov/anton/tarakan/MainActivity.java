@@ -1,6 +1,5 @@
 package com.goncharov.anton.tarakan;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Создаём MediaPlayer и запускаем стартовую музыку
     public void createMP() {
         mMediaPlayer = MediaPlayer.create(this, R.raw.start_theme);
         mMediaPlayer.setLooping(true);
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         releaseMP();
     }
 
+    //Освобождаем ресурсы
     private void releaseMP() {
         if (mMediaPlayer != null) {
             try {

@@ -8,11 +8,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
-
 
 public class KitchenActivity extends Activity {
 
@@ -25,7 +22,7 @@ public class KitchenActivity extends Activity {
     TableLayout tableLayout;
     private static Context mContext;
     private int clickCount = 0;
-    static MediaPlayer mMediaPlayer;
+    MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,38 +32,54 @@ public class KitchenActivity extends Activity {
         //Запрещаем переворачивание экрана
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        //Сохраняем Context для класса SoundEngine
         mContext = this;
 
+        //Задаём таракану позицию
         tarakan.setPosition();
 
         //Запускаем фоновую музыку
         createMP();
 
+        //Разметка идёт с помощью TableLayout (GridLayout, GridView и прочие не подошли)
+        //Находим ID TableLayout'а
         tableLayout = (TableLayout) findViewById(R.id.kitchenAct);
 
+        //Создаём двумерный массив звуковых файлов для 15-ти кнопок
         String[][] sounds = {{"air_slash.mp3", "bottles_kicking.mp3", "stone_throwing.mp3"},
                 {"glass_crashing.mp3", "squeze.mp3", "cups_breaking.mp3"},
                 {"door_screeching.mp3", "water_boiling.mp3", "opening_bottle.mp3"},
                 {"toy_screeching.mp3","plates_breaking.mp3", "hammer_hits.mp3"},
                 {"man_sneezing.mp3", "cat_screaming.mp3", "woman_screaming.mp3"}};
 
-
+        //TableLayout работает через TableRow, поэтому создаём массив из 5 TableRow
         TableRow[] tableRows = new TableRow[5];
 
         //Обходим все кнопки и создаём для каждой свой обработчик
         for (int i = 0; i < 5; i++) {
+
+            //Извлекаем номер строки
             tableRows[i] = (TableRow) tableLayout.getChildAt(i);
             for (int j = 0; j < 3; j++) {
+
+                //Из строки поочерёдно извлекаем кнопки
                 Button btn = (Button)tableRows[i].getChildAt(j);
+
+                //Загружаем звуковой файл для кнопки
                 final int soundButton = soundEngine.loadSound(sounds[i][j]);
 
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent;
+
+                        //Активируем все кнопки
                         v.setEnabled(true);
 
+                        //Если таракан не найден
                         if (clickCount == 9) {
+
+                            //Деактивируем все кнопки
                             v.setEnabled(false);
                             soundEngine.playTarakanSound(soundTarakanMissed);
                             intent = new Intent(KitchenActivity.this, GameOverActivity.class);
@@ -74,14 +87,18 @@ public class KitchenActivity extends Activity {
                             clickCount = 0;
                             return;
                         }
-                        //Проигрываем разные звуки клеток с помощью массива sounds[i]
+
+                        //Проигрываем разные звуки клеток с помощью массива sounds[i][j]
                         soundEngine.playSound(soundButton);
+
                         Thread tarakanThread = new Thread();
                         try {
                             tarakanThread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
+                        //Если таракан найден
                         if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
                             v.setEnabled(false);
                             soundEngine.playTarakanSound(soundTarakanFound);
@@ -91,6 +108,7 @@ public class KitchenActivity extends Activity {
                             clickCount = 0;
                             return;
                         } else {
+                            //Если не попали по таракану
                             soundEngine.playTarakanSound(soundTarakan);
                         }
                         tarakan.setPosition();
@@ -101,12 +119,7 @@ public class KitchenActivity extends Activity {
         }
     }
 
-
-    public static MediaPlayer getMediaPlayer() {
-        return mMediaPlayer;
-    }
-
-
+    //Создаём MediaPlayer и запускаем фоновую музыку
     public void createMP() {
         mMediaPlayer = MediaPlayer.create(this, R.raw.background_music);
         mMediaPlayer.setLooping(true);
@@ -114,7 +127,8 @@ public class KitchenActivity extends Activity {
         mMediaPlayer.start();
     }
 
-    public static Context getContext(){
+    //Получаем Context класса для класса SoundEngine
+    public static Context getContext() {
         return mContext;
     }
 
@@ -152,6 +166,7 @@ public class KitchenActivity extends Activity {
         clickCount = 0;
     }
 
+    //Освобождаем ресурсы
     private void releaseMP() {
         if (mMediaPlayer != null) {
             try {
