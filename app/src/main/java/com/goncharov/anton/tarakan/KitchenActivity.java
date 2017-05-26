@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -73,8 +74,11 @@ public class KitchenActivity extends Activity {
                     public void onClick(View v) {
                         Intent intent;
 
+                        final View view = v;
+
                         //Активируем все кнопки
                         v.setEnabled(true);
+                        v.setVisibility(View.VISIBLE);
 
                         //Если таракан не найден
                         if (clickCount == 9) {
@@ -98,18 +102,37 @@ public class KitchenActivity extends Activity {
                             e.printStackTrace();
                         }
 
+                        Handler handler = new Handler();
+
                         //Если таракан найден
                         if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
                             v.setEnabled(false);
                             soundEngine.playTarakanSound(soundTarakanFound);
                             v.setBackgroundResource(R.mipmap.tarakan_icon);
-                            intent = new Intent(KitchenActivity.this, WinActivity.class);
-                            startActivity(intent);
+                            //Устанавливаем задержку в 2 секунды
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    view.setBackgroundResource(R.drawable.back);
+                                    Intent intent = new Intent(KitchenActivity.this, WinActivity.class);
+                                    startActivity(intent);
+                                }
+                            }, 2000);
+
                             clickCount = 0;
+
+                            //Принудительно выходим из цикла
                             return;
+
                         } else {
                             //Если не попали по таракану
                             soundEngine.playTarakanSound(soundTarakan);
+                            v.setBackgroundResource(R.mipmap.oops);
+                            //Устанавливаем задержку в 2 секунды
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    view.setBackgroundResource(R.drawable.back);
+                                }
+                            }, 2000);
                         }
                         tarakan.setPosition();
                         clickCount++;

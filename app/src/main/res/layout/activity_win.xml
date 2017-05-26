@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView8"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingTop="30dp"
         android:text="@string/win_description2"
         android:textAlignment="center"
@@ -47,9 +48,9 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="61dp"
         tools:layout_editor_absoluteY="324dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="38dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -75,11 +76,24 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_above="@+id/buttonAgainWin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10dp"
         android:text="@string/win_description3"
         android:textAlignment="center"
-        android:textSize="18sp"
-        android:layout_below="@+id/textView9"
-        android:layout_centerHorizontal="true" />
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/mortal_tarakan"
+        android:layout_above="@+id/textView10"
+        android:layout_alignRight="@+id/buttonExitWin"
+        android:layout_alignEnd="@+id/buttonExitWin"
+        android:layout_alignLeft="@+id/buttonAgainWin"
+        android:layout_alignStart="@+id/buttonAgainWin"
+        android:layout_below="@+id/textView9" />
 
 </RelativeLayout>
