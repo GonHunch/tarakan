@@ -17,6 +17,7 @@ public class KitchenActivity extends Activity {
     private int soundTarakan;
     private int soundTarakanFound;
     private int soundTarakanMissed;
+    private int soundOhYeah;
     Tarakan tarakan = new Tarakan();
     SoundEngine soundEngine = new SoundEngine();
 
@@ -55,6 +56,8 @@ public class KitchenActivity extends Activity {
 
         //TableLayout работает через TableRow, поэтому создаём массив из 5 TableRow
         TableRow[] tableRows = new TableRow[5];
+
+        tarakan.setPosition();
 
         //Обходим все кнопки и создаём для каждой свой обработчик
         for (int i = 0; i < 5; i++) {
@@ -107,6 +110,7 @@ public class KitchenActivity extends Activity {
                         //Если таракан найден
                         if (tarakan.checkPosition(Integer.parseInt((String) v.getTag()))) {
                             v.setEnabled(false);
+                            soundEngine.playTarakanSound(soundOhYeah);
                             soundEngine.playTarakanSound(soundTarakanFound);
                             v.setBackgroundResource(R.mipmap.tarakan_icon);
                             //Устанавливаем задержку в 2 секунды
@@ -116,7 +120,7 @@ public class KitchenActivity extends Activity {
                                     Intent intent = new Intent(KitchenActivity.this, WinActivity.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1500);
 
                             clickCount = 0;
 
@@ -132,9 +136,9 @@ public class KitchenActivity extends Activity {
                                 public void run() {
                                     view.setBackgroundResource(R.drawable.back);
                                 }
-                            }, 2000);
+                            }, 500);
                         }
-                        tarakan.setPosition();
+
                         clickCount++;
                     }
                 });
@@ -164,6 +168,7 @@ public class KitchenActivity extends Activity {
         soundTarakan = soundEngine.loadSoundTarakan("tarakan_laugh.mp3");
         soundTarakanFound = soundEngine.loadSoundTarakan("applause.mp3");
         soundTarakanMissed = soundEngine.loadSoundTarakan("game_over.mp3");
+        soundOhYeah = soundEngine.loadSoundTarakan("oh_yeah.mp3");
     }
 
     @Override

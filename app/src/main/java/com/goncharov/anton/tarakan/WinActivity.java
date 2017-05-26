@@ -3,6 +3,7 @@ package com.goncharov.anton.tarakan;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.Button;
 
 public class WinActivity extends AppCompatActivity {
 
+    private MediaPlayer mMediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +21,9 @@ public class WinActivity extends AppCompatActivity {
 
         //Запрещаем переворачивание экрана
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //Запускаем фоновую музыку фанфаров
+        createMP();
 
         Button againButton = (Button)findViewById(R.id.buttonAgainWin);
         againButton.setOnClickListener(new View.OnClickListener(){
@@ -49,13 +55,55 @@ public class WinActivity extends AppCompatActivity {
         });
     }
 
+    public void createMP() {
+        mMediaPlayer = MediaPlayer.create(this, R.raw.final_fanfary);
+        mMediaPlayer.setLooping(false);
+        mMediaPlayer.setVolume(0.6f, 0.6f);
+        mMediaPlayer.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMediaPlayer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMediaPlayer.pause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMediaPlayer.pause();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        releaseMP();
 
         //Закрывает приложение с очисткой истории
         moveTaskToBack(true);
         System.runFinalization();
         System.exit(0);
     }
+
+    //Освобождаем ресурсы
+    private void releaseMP() {
+        if (mMediaPlayer != null) {
+            try {
+                mMediaPlayer.reset();
+                mMediaPlayer.prepare();
+                mMediaPlayer.stop();
+                mMediaPlayer.release();
+                mMediaPlayer = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
