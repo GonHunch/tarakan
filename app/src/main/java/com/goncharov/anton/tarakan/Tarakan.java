@@ -14,7 +14,7 @@ class Tarakan {
         for (int i = 0; i < secretPlaces; i++) {
             if (i + 1 < secretPlaces && positions[i] == positions[i+1]) {
                 positions[i] = (int) (a + (Math.random() * b));
-                Toast.makeText(KitchenActivity.getContext(), String.valueOf(positions[i]), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(KitchenActivity.getContext(), String.valueOf(positions[i]), Toast.LENGTH_SHORT).show();
             }
         }
     }
